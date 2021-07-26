@@ -19,7 +19,9 @@ build_function()
   export IMMUTABLE_IMAGE_NAME=${DOCKER_REPO}:${IMMUTABLE_TAG}
   echo '--- Env vars just before building'
   printenv
-  COMPOSE_FILE=docker-compose.yaml:hooks/docker-compose.ci.yaml \
+  COMPOSE_DOCKER_CLI_BUILD=1 \
+    DOCKER_BUILDKIT=1 \
+    COMPOSE_FILE=docker-compose.yaml:hooks/docker-compose.ci.yaml \
     docker-compose build app;
   # release
   docker tag ${IMMUTABLE_IMAGE_NAME} ${IMAGE_NAME}

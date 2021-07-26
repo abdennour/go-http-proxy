@@ -1,0 +1,25 @@
+#!/bin/sh
+# go tool dist list | awk -F / '{print "GOOS="$1 " GOARCH=" $2 " go '$restargs' build . "}'
+mkdir -p bin
+VERSION=$(git describe --tags)
+APP_NAME=go-http-proxy
+
+go tool dist list | while read l; do
+  export GOOS=$(echo $l | awk -F / '{print $1}')
+  if [ "${GOOS}" = "linux" ] ||  [ "${GOOS}" = "darwin" ] || [ "${GOOS}" = "windows" ] ; then
+    export GOARCH=$(echo $l | awk -F / '{print $2}');
+    artifact_suffixed=${APP_NAME}-${GOOS}-${GOARCH};
+    if [ "${GOOS}" = "windows" ] ; then
+      artifact=${APP_NAME}.exe;
+      artifact_suffixed=${APP_NAME}-${GOOS}-${GOARCH}.exe;
+    fi
+
+    if [ "${GOARCH}" = "amd64" ] ||  [ "${GOARCH}" = "arm64" ]; then
+      go build -ldflags "-s -w -X=main.version=${VERSION}" -o bin/${artifact_suffixed} .
+    fi
+    # default binary without suffixes to one arch and one OS
+    if [ "${GOARCH}" = "amd64" ]; then
+      cp bin/${artifact_suffixed} bin/${artifact}
+    fi
+  fi
+done
