@@ -1,0 +1,4 @@
+github.com/smartystreets/assertions v1.2.0/go.mod h1:tcbTF8ujkAEcZ8TElKY+i30BzYlVhC/LOxJk7iOWnoo=
+github.com/smartystreets/cproxy/v2 v2.0.3 h1:2QZt+pcC7s114RJyv2sie3te7EYaAkMgTU7t/pjND8A=
+github.com/smartystreets/cproxy/v2 v2.0.3/go.mod h1:6vp0ha5Zwl83i12bH5v484+dXLZqb9OSDqioTL5w7Yg=
+github.com/smartystreets/gunit v1.4.2/go.mod h1:ZjM1ozSIMJlAz/ay4SG8PeKF00ckUp+zMHZXV9/bvak=

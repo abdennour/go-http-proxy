@@ -1,0 +1,15 @@
+version: '3.9'
+
+services:
+  app:
+    image: ${IMMUTABLE_IMAGE_NAME}
+    labels:
+      maintainer: "Abdennour Toumi <https://kubernetes.tn>"
+      tn.kubernetes.license: "MIT"
+      tn.kubernetes.name: "abdennour/${IMAGE_NAME_ONLY}"
+      tn.kubernetes.url: "https://github.com/abdennour/bakery-images"
+      tn.kubernetes.vcs-url: "https://github.com/abdennour/bakery-images.git"
+      tn.kubernetes.vcs-type: Git
+      tn.kubernetes.build-date: ${BUILD_DATE}
+      tn.kubernetes.version: ${IMMUTABLE_TAG}
+      tn.kubernetes.vcs-ref: ${SOURCE_COMMIT}

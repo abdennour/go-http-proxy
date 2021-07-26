@@ -1,0 +1,34 @@
+#!/usr/bin/env sh
+
+# $1: tag
+build_function()
+{
+  IMMUTABLE_TAG=$1
+  # if no tag provided
+  if [ -z "${IMMUTABLE_TAG}" ]; then
+    if [ ! -z "${SOURCE_COMMIT}" ]; then
+      export IMMUTABLE_TAG=v$(echo $SOURCE_COMMIT | tail -c +2|head -c 3)
+    else
+      timestamp=v$(date +%s)
+      export IMMUTABLE_TAG=v$(echo $timestamp | tail -c +2|head -c 3)
+    fi
+  fi
+
+  echo "------ HOOK START - BUILD -------"
+  export BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"`
+  export IMMUTABLE_IMAGE_NAME=${DOCKER_REPO}:${IMMUTABLE_TAG}
+  echo '--- Env vars just before building'
+  printenv
+  COMPOSE_FILE=docker-compose.yaml:hooks/docker-compose.ci.yaml \
+    docker-compose build app;
+  # release
+  docker tag ${IMMUTABLE_IMAGE_NAME} ${IMAGE_NAME}
+
+  echo "---publish immutable artifact ----"
+  docker push ${IMMUTABLE_IMAGE_NAME}
+  echo "------ HOOK END - BUILD -------"
+}
+
+
+build_function
+build_function latest
