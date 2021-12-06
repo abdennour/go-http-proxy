@@ -29,7 +29,7 @@ curl -LO https://github.com/abdennour/go-http-proxy/releases/download/v1.0.0/go-
 Download this executable file: https://github.com/abdennour/go-http-proxy/releases/download/v1.0.0/go-http-proxy-windows-amd64.exe
 
 
-**Run it **
+**Run it**
 
 ```sh
 go-http-proxy
