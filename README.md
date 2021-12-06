@@ -13,14 +13,14 @@ This git repo is to use the Cproxy library and web app from it as binary artifac
 **Install it in Linux**
 
 ```sh
-curl -LO https://github.com/abdennour/go-http-proxy/releases/download/v1.0.0/go-http-proxy-linux-amd64 \
+curl -LO https://github.com/abdennour/go-http-proxy/releases/download/v1.0.0/go-http-proxy-linux-amd64 && \
  chmod +x go-http-proxy-* && sudo mv go-http-proxy-* /usr/local/bin/go-http-proxy
 ```
 
 **Install it in MacOS**
 
 ```sh
-curl -LO https://github.com/abdennour/go-http-proxy/releases/download/v1.0.0/go-http-proxy-darwin-amd64 \
+curl -LO https://github.com/abdennour/go-http-proxy/releases/download/v1.0.0/go-http-proxy-darwin-amd64 && \
  chmod +x go-http-proxy-* && sudo mv go-http-proxy-* /usr/local/bin/go-http-proxy
 ```
 
@@ -33,6 +33,7 @@ Download this executable file: https://github.com/abdennour/go-http-proxy/releas
 
 ```sh
 go-http-proxy
+# run it in background by adding "&" at the end of the command
 ```
 
 And now the the proxy should be listening on localhost:8080
@@ -40,8 +41,14 @@ And now the the proxy should be listening on localhost:8080
 **Run it with custom port**
 
 ```sh
+# change default port 8080 to another port (9090)
 go-http-proxy --port 9090
 ```
+
+**Configure your HTTP proxy clients**
+
+- Example: Curl behind HTTP proxy -> `curl -x localhost:8080 https://something.com`
+
 
 And now the the proxy should be listening on localhost:9090
 
